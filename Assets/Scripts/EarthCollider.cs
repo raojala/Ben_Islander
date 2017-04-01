@@ -28,7 +28,7 @@ public class EarthCollider : MonoBehaviour {
         { 
             collision = true;
             source.PlayOneShot(efect);
-            Invoke("Load", 1);
+            //Invoke("Load", 1);
 
         }
         

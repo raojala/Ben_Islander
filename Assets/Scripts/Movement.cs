@@ -8,14 +8,15 @@ public class Movement : MonoBehaviour {
     public float speed_P = 30;
     Rigidbody2D body;
     public float maxSpeed = 1;
-    
 
+    TrailRenderer tr;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         body = GetComponent<Rigidbody2D>();
+        tr = transform.FindChild("Alus").GetComponent<TrailRenderer>();
 
-	}
+    }
    
     void Update () {
 
@@ -23,12 +24,14 @@ public class Movement : MonoBehaviour {
         {
             MoveLeft();
         }
-
-        if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             MoveRight();
         }
-        
+        else
+        {
+            tr.enabled = false;
+        }
 
         /*
         if (Input.GetKey(KeyCode.UpArrow))
@@ -44,11 +47,15 @@ public class Movement : MonoBehaviour {
 
     void MoveLeft()
     {
+        
+        tr.enabled = true;
         body.AddRelativeForce(body.velocity.normalized + Vector2.left * speed_P);
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxSpeed);
     }
     void MoveRight()
     {
+        TrailRenderer tr = transform.FindChild("Alus").GetComponent<TrailRenderer>();
+        tr.enabled = true;
         body.AddRelativeForce(body.velocity.normalized + Vector2.right * speed_P);
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxSpeed);
 
